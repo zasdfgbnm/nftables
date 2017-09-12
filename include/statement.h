@@ -76,6 +76,12 @@ struct reject_stmt {
 
 extern struct stmt *reject_stmt_alloc(const struct location *loc);
 
+struct abcde_stmt {
+	char *			text;
+};
+
+extern struct stmt *abcde_stmt_alloc(const struct location *loc);
+
 struct nat_stmt {
 	enum nft_nat_types	type;
 	struct expr		*addr;
@@ -199,6 +205,7 @@ extern struct stmt *xt_stmt_alloc(const struct location *loc);
  * @STMT_LIMIT:		limit statement
  * @STMT_LOG:		log statement
  * @STMT_REJECT:	REJECT statement
+ * @STMT_ABCDE:		abcde statement
  * @STMT_NAT:		NAT statement
  * @STMT_MASQ:		masquerade statement
  * @STMT_REDIR:		redirect statement
@@ -222,6 +229,7 @@ enum stmt_types {
 	STMT_LIMIT,
 	STMT_LOG,
 	STMT_REJECT,
+	STMT_ABCDE,
 	STMT_NAT,
 	STMT_MASQ,
 	STMT_REDIR,
@@ -280,6 +288,7 @@ struct stmt {
 		struct log_stmt		log;
 		struct limit_stmt	limit;
 		struct reject_stmt	reject;
+		struct abcde_stmt	abcde;
 		struct nat_stmt		nat;
 		struct masq_stmt	masq;
 		struct redir_stmt	redir;

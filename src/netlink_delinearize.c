@@ -168,7 +168,7 @@ static void netlink_parse_immediate(struct netlink_parse_ctx *ctx,
 	struct expr *expr;
 
 	if (nftnl_expr_is_set(nle, NFTNL_EXPR_IMM_VERDICT)) {
-		nld.verdict = nftnl_expr_get_u32(nle, NFTNL_EXPR_IMM_VERDICT); 
+		nld.verdict = nftnl_expr_get_u32(nle, NFTNL_EXPR_IMM_VERDICT);
 		if  (nftnl_expr_is_set(nle, NFTNL_EXPR_IMM_CHAIN)) {
 			nld.chain = nftnl_expr_get(nle, NFTNL_EXPR_IMM_CHAIN,
 						   &nld.len);
@@ -799,6 +799,16 @@ static void netlink_parse_reject(struct netlink_parse_ctx *ctx,
 	ctx->stmt = stmt;
 }
 
+static void netlink_parse_abcde(struct netlink_parse_ctx *ctx,
+				 const struct location *loc,
+				 const struct nftnl_expr *expr)
+{
+	struct stmt *stmt;
+	stmt = abcde_stmt_alloc(loc);
+	stmt->abcde.text = xstrdup(nftnl_expr_get_str(expr, NFTNL_EXPR_BASE));
+	ctx->stmt = stmt;
+}
+
 static void netlink_parse_nat(struct netlink_parse_ctx *ctx,
 			      const struct location *loc,
 			      const struct nftnl_expr *nle)
@@ -1144,6 +1154,7 @@ static const struct {
 	{ .name = "limit",	.parse = netlink_parse_limit },
 	{ .name = "range",	.parse = netlink_parse_range },
 	{ .name = "reject",	.parse = netlink_parse_reject },
+	{ .name = "abcde",	.parse = netlink_parse_abcde },
 	{ .name = "nat",	.parse = netlink_parse_nat },
 	{ .name = "notrack",	.parse = netlink_parse_notrack },
 	{ .name = "masq",	.parse = netlink_parse_masq },

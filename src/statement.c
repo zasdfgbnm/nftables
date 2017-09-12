@@ -417,6 +417,28 @@ struct stmt *reject_stmt_alloc(const struct location *loc)
 	return stmt_alloc(loc, &reject_stmt_ops);
 }
 
+static void abcde_stmt_print(const struct stmt *stmt)
+{
+	printf("abcde \"%s\"", stmt->abcde.text);
+}
+
+static void abcde_stmt_destroy(const struct stmt *stmt)
+{
+	xfree(stmt->abcde.prefix);
+}
+
+static const struct stmt_ops abcde_stmt_ops = {
+	.type		= STMT_ABCDE,
+	.name		= "abcde",
+	.print		= abcde_stmt_print,
+	.destroy	= abcde_stmt_destroy,
+};
+
+struct stmt *abcde_stmt_alloc(const struct location *loc)
+{
+	return stmt_alloc(loc, &abcde_stmt_ops);
+}
+
 static void print_nf_nat_flags(uint32_t flags)
 {
 	const char *delim = " ";

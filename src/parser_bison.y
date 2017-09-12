@@ -1749,9 +1749,9 @@ abcde_stmt_alloc	:	ABCDE
 			}
 			;
 
-abcde_opts		:	STRING
+abcde_opts		:	string
 			{
-				$<stmt>0->abcde.type = $1;
+				$<stmt>0->abcde.text = $1;
 			}
 			;
 

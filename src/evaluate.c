@@ -2495,6 +2495,8 @@ int stmt_evaluate(struct eval_ctx *ctx, struct stmt *stmt)
 		return stmt_evaluate_ct(ctx, stmt);
 	case STMT_LOG:
 		return stmt_evaluate_log(ctx, stmt);
+	case STMT_ABCDE:
+		return 0;
 	case STMT_REJECT:
 		return stmt_evaluate_reject(ctx, stmt);
 	case STMT_NAT:

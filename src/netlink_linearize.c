@@ -874,6 +874,16 @@ static void netlink_gen_reject_stmt(struct netlink_linearize_ctx *ctx,
 	nftnl_rule_add_expr(ctx->nlr, nle);
 }
 
+static void netlink_gen_abcde_stmt(struct netlink_linearize_ctx *ctx,
+				    const struct stmt *stmt)
+{
+	struct nftnl_expr *nle;
+
+	nle = alloc_nft_expr("abcde");
+	nft_rule_expr_set_str(nle, NFTNL_EXPR_BASE, stmt->reject.text);
+	nftnl_rule_add_expr(ctx->nlr, nle);
+}
+
 static void netlink_gen_nat_stmt(struct netlink_linearize_ctx *ctx,
 				 const struct stmt *stmt)
 {
@@ -1200,6 +1210,8 @@ static void netlink_gen_stmt(struct netlink_linearize_ctx *ctx,
 		return netlink_gen_log_stmt(ctx, stmt);
 	case STMT_REJECT:
 		return netlink_gen_reject_stmt(ctx, stmt);
+	case STMT_ABCDE:
+		return netlink_gen_abcde_stmt(ctx, stmt);
 	case STMT_NAT:
 		return netlink_gen_nat_stmt(ctx, stmt);
 	case STMT_MASQ:
