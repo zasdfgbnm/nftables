@@ -424,7 +424,7 @@ static void abcde_stmt_print(const struct stmt *stmt)
 
 static void abcde_stmt_destroy(const struct stmt *stmt)
 {
-	xfree(stmt->abcde.prefix);
+	xfree(stmt->abcde.text);
 }
 
 static const struct stmt_ops abcde_stmt_ops = {

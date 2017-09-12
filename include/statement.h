@@ -77,7 +77,7 @@ struct reject_stmt {
 extern struct stmt *reject_stmt_alloc(const struct location *loc);
 
 struct abcde_stmt {
-	char *			text;
+	const char *	text;
 };
 
 extern struct stmt *abcde_stmt_alloc(const struct location *loc);
