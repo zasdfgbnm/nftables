@@ -399,6 +399,7 @@ static void location_update(struct location *loc, struct location *rhs, int n)
 %token RANDOM			"random"
 %token FULLY_RANDOM		"fully-random"
 %token PERSISTENT		"persistent"
+%token ABCDE			"abcde"
 
 %token QUEUE			"queue"
 %token QUEUENUM			"num"
@@ -499,6 +500,8 @@ static void location_update(struct location *loc, struct location *rhs, int n)
 %type <val>			set_stmt_op
 %type <stmt>			flow_stmt flow_stmt_alloc
 %destructor { stmt_free($$); }	flow_stmt flow_stmt_alloc
+%type <stmt>			abcde_stmt abcde_stmt_alloc
+%destructor { stmt_free($$); }	abcde_stmt abcde_stmt_alloc
 
 %type <expr>			symbol_expr verdict_expr integer_expr variable_expr
 %destructor { expr_free($$); }	symbol_expr verdict_expr integer_expr variable_expr
@@ -1400,6 +1403,7 @@ stmt			:	verdict_stmt
 			|	limit_stmt
 			|	quota_stmt
 			|	reject_stmt
+			|	abcde_stmt
 			|	nat_stmt
 			|	queue_stmt
 			|	ct_stmt
@@ -1733,6 +1737,21 @@ reject_opts		:       /* empty */
 						   state->msgs);
 					YYERROR;
 				}
+			}
+			;
+
+abcde_stmt		:	abcde_stmt_alloc	abcde_opts
+			;
+
+abcde_stmt_alloc	:	ABCDE
+			{
+				$$ = abcde_stmt_alloc(&@$);
+			}
+			;
+
+abcde_opts		:	STRING
+			{
+				$<stmt>0->abcde.type = $1;
 			}
 			;
 

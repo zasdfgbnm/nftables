@@ -333,6 +333,7 @@ addrstring	({macaddr}|{ip4addr}|{ip6addr})
 "random"		{ return RANDOM; }
 "fully-random"		{ return FULLY_RANDOM; }
 "persistent"		{ return PERSISTENT; }
+"abcde"             { return ABCDE; }
 
 "ll"			{ return LL_HDR; }
 "nh"			{ return NETWORK_HDR; }
