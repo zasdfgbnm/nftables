@@ -422,7 +422,7 @@ static void abcde_stmt_print(const struct stmt *stmt)
 	printf("abcde \"%s\"", stmt->abcde.text);
 }
 
-static void abcde_stmt_destroy(const struct stmt *stmt)
+static void abcde_stmt_destroy(struct stmt *stmt)
 {
 	xfree(stmt->abcde.text);
 }
