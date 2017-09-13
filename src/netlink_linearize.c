@@ -881,7 +881,7 @@ static void netlink_gen_abcde_stmt(struct netlink_linearize_ctx *ctx,
 	nle = alloc_nft_expr("abcde");
 
 	if (stmt->abcde.text != NULL) {
-		nftnl_expr_set_str(nle, NFTNL_EXPR_BASE, stmt->abcde.text);
+		nftnl_expr_set_str(nle, NFTNL_EXPR_ABCDE_TEXT, stmt->abcde.text);
 	}
 	nftnl_rule_add_expr(ctx->nlr, nle);
 }

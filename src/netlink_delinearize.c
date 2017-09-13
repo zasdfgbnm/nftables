@@ -805,7 +805,7 @@ static void netlink_parse_abcde(struct netlink_parse_ctx *ctx,
 {
 	struct stmt *stmt;
 	stmt = abcde_stmt_alloc(loc);
-	stmt->abcde.text = xstrdup(nftnl_expr_get_str(expr, NFTNL_EXPR_BASE));
+	stmt->abcde.text = xstrdup(nftnl_expr_get_str(expr, NFTNL_EXPR_ABCDE_TEXT));
 	ctx->stmt = stmt;
 }
 
